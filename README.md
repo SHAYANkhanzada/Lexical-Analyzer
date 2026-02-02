@@ -1,6 +1,6 @@
 # 🔍 Lexical Analyzer & Basic Interpreter
 
-A modern, web-based Lexical Analyzer and Interpreter for a custom "Basic" programming language. This project features a sleek dark UI, real-time tokenization, and code execution.
+> **A modern, web-based Lexical Analyzer and Basic Interpreter built with Python and Flask, featuring real-time tokenization and a sleek dark-mode UI.**
 
 ## 🚀 Features
 
