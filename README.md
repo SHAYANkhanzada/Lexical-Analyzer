@@ -2,6 +2,12 @@
 
 > **A modern, web-based Lexical Analyzer and Basic Interpreter built with Python and Flask, featuring real-time tokenization and a sleek dark-mode UI.**
 
+## 📸 Screenshots
+
+| Editor View | Tokenization Result |
+| :---: | :---: |
+| ![Editor](screenshots/editor.png) | ![Output](screenshots/output.png) |
+
 ## 🚀 Features
 
 - **Lexical Analysis**: Real-time tokenization of source code.
