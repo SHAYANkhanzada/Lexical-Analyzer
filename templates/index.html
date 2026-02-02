@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lexical Analyzer Project - Interactive UI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="32" height="32" rx="8" fill="url(#gradient)" />
+                    <path d="M8 12L16 8L24 12V20L16 24L8 20V12Z" stroke="white" stroke-width="2"
+                        stroke-linejoin="round" />
+                    <defs>
+                        <linearGradient id="gradient" x1="0" y1="0" x2="32" y2="32">
+                            <stop offset="0%" stop-color="#06b6d4" />
+                            <stop offset="100%" stop-color="#a855f7" />
+                        </linearGradient>
+                    </defs>
+                </svg>
+                <h1>Lexical Analyzer Project</h1>
+            </div>
+            <div class="status-badge"
+                style="display: flex; flex-direction: column; align-items: flex-end; gap: 0.25rem;">
+                <div style="font-size: 0.875rem; font-weight: 500;">Shayan (14958), Zarrar (15162)</div>
+                <div style="font-size: 0.875rem; font-weight: 500;">Aliya (13604), Somia (10657)</div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Editor Section -->
+            <div class="editor-section glass-panel">
+                <div class="section-header">
+                    <h2>Code Editor</h2>
+                    <div class="editor-actions">
+                        <button class="btn-secondary" id="runTestFileBtn" style="margin-right: 0.5rem;">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <path
+                                    d="M12 4H4C3.44772 4 3 4.44772 3 5V11C3 11.5523 3.44772 12 4 12H12C12.5523 12 13 11.5523 13 11V5C13 4.44772 12.5523 4 12 4Z"
+                                    stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                                <path d="M8 6V10M6 8H10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                            Run Test File
+                        </button>
+                        <button class="btn-secondary" id="clearBtn">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <path
+                                    d="M2 4h12M5.333 4V2.667a1.333 1.333 0 0 1 1.334-1.334h2.666a1.333 1.333 0 0 1 1.334 1.334V4m2 0v9.333a1.333 1.333 0 0 1-1.334 1.334H4.667a1.333 1.333 0 0 1-1.334-1.334V4h9.334Z"
+                                    stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                            Clear
+                        </button>
+                    </div>
+                </div>
+                <div class="editor-wrapper">
+                    <textarea id="codeInput"
+                        placeholder="Enter your code here...&#10;&#10;Examples:&#10;  123&#10;  [1, 2, 3]&#10;  myVariable&#10;  [x, y, z]"
+                        spellcheck="false"></textarea>
+                    <div class="line-numbers" id="lineNumbers">1</div>
+                </div>
+                <div class="editor-footer">
+                    <span class="hint">💡 Press <kbd>Ctrl</kbd> + <kbd>Enter</kbd> to execute</span>
+                    <button class="btn-primary" id="executeBtn">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M3.333 2.667L12.667 8l-9.334 5.333V2.667z" fill="currentColor" />
+                        </svg>
+                        Execute
+                    </button>
+                </div>
+            </div>
+
+            <!-- Output Section -->
+            <div class="output-section glass-panel">
+                <div class="section-header">
+                    <h2>Output</h2>
+                    <div class="output-stats" id="outputStats"></div>
+                </div>
+                <div class="output-content" id="outputContent">
+                    <div class="empty-state">
+                        <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+                            <circle cx="32" cy="32" r="30" stroke="url(#emptyGradient)" stroke-width="2"
+                                stroke-dasharray="4 4" />
+                            <path d="M32 20v24M20 32h24" stroke="url(#emptyGradient)" stroke-width="2"
+                                stroke-linecap="round" />
+                            <defs>
+                                <linearGradient id="emptyGradient" x1="0" y1="0" x2="64" y2="64">
+                                    <stop offset="0%" stop-color="#06b6d4" stop-opacity="0.3" />
+                                    <stop offset="100%" stop-color="#a855f7" stop-opacity="0.3" />
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                        <p>No output yet</p>
+                        <span>Execute some code to see results here</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Examples Section -->
+        <div class="examples-section glass-panel">
+            <h3>Quick Examples</h3>
+            <div class="examples-grid">
+                <button class="example-card" data-code="42">
+                    <span class="example-label">Integer</span>
+                    <code>42</code>
+                </button>
+                <button class="example-card" data-code="3.14">
+                    <span class="example-label">Float</span>
+                    <code>3.14</code>
+                </button>
+                <button class="example-card" data-code="myVar">
+                    <span class="example-label">Variable</span>
+                    <code>myVar</code>
+                </button>
+                <button class="example-card" data-code="[1, 2, 3]">
+                    <span class="example-label">List</span>
+                    <code>[1, 2, 3]</code>
+                </button>
+                <button class="example-card" data-code="[x, y, z]">
+                    <span class="example-label">Var List</span>
+                    <code>[x, y, z]</code>
+                </button>
+                <button class="example-card" data-code="[]">
+                    <span class="example-label">Empty List</span>
+                    <code>[]</code>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}?v=5"></script>
+</body>
+
+</html>

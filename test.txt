@@ -1,0 +1,11 @@
+VAR marks = 72
+# good job shayan
+
+"
+# good job shayan
+"
+IF marks >= 50 THEN
+  PRINT("Pass")
+ELSE
+  PRINT("Fail")
+END

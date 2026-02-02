@@ -1,0 +1,16 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.venv/
+env/
+.env
+
+# IDs and secret files
+.gemini/
+.agent/
+
+# Windows
+Thumbs.db
+desktop.ini
